@@ -12,8 +12,6 @@ public class LoginTests extends BaseTest {
     private LoginPage loginPage;
     private BurgerMenuPage burgerMenuPage;
     private Utility faker;
-    private final String VALID_PASSWORD = "secret_sauce";
-    private final String[] VALID_USERNAMES = {"standard_user", "problem_user", "performance_glitch_user"};
     private final String LOCKED_OUT_USER_USERNAME = "locked_out_user";
     private String fakeUsername;
     private String fakePassword;
@@ -101,18 +99,5 @@ public class LoginTests extends BaseTest {
 
     private int getRandomIterations() {
         return (int) (Math.random() * 10);
-    }
-
-    private int getRandomIndex() {
-        int index = (int) (Math.random() * VALID_USERNAMES.length);
-        if (index == VALID_USERNAMES.length) {
-            return (int) (Math.random() * (VALID_USERNAMES.length - 1));
-        } else {
-            return index;
-        }
-    }
-
-    private String getRandomValidUsername() {
-        return VALID_USERNAMES[getRandomIndex()];
     }
 }

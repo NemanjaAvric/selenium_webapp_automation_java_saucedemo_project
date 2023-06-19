@@ -13,12 +13,14 @@ public abstract class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait webDriverWait;
     protected final String BASE_URL = "https://www.saucedemo.com/";
+    protected final String VALID_PASSWORD = "secret_sauce";
+    protected final String[] VALID_USERNAMES = {"standard_user", "problem_user", "performance_glitch_user"};
 
     @BeforeClass
     public void beforeClass() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     @BeforeMethod
@@ -29,5 +31,18 @@ public abstract class BaseTest {
     @AfterClass
     public void afterClass() {
         driver.quit();
+    }
+
+    protected int getRandomIndex() {
+        int index = (int) (Math.random() * VALID_USERNAMES.length);
+        if (index == VALID_USERNAMES.length) {
+            return (int) (Math.random() * (VALID_USERNAMES.length - 1));
+        } else {
+            return index;
+        }
+    }
+
+    protected String getRandomValidUsername() {
+        return VALID_USERNAMES[getRandomIndex()];
     }
 }

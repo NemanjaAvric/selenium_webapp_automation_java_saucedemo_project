@@ -10,7 +10,9 @@ public class BurgerMenuPage extends BasePage {
     private WebElement burgerMenuButton;
     @FindBy(id = "logout_sidebar_link")
     private WebElement logoutButton;
-    private final String LOGOUT_BUTTON_TEXT = "Logout";
+    @FindBy(id = "reset_sidebar_link")
+    private WebElement resetAppStateButton;
+    private final String LOGOUT_BUTTON_EXPECTED_TEXT = "Logout";
 
     public BurgerMenuPage(WebDriver driver, WebDriverWait webDriverWait) {
         super(driver, webDriverWait);
@@ -21,12 +23,25 @@ public class BurgerMenuPage extends BasePage {
     }
 
     public void burgerMenuButtonClick() {
-        burgerMenuButton.click();
-        waitForTextToBePresentInElement(logoutButton, LOGOUT_BUTTON_TEXT);
+        clickOnWebElement(burgerMenuButton);
+        waitForTextToBePresentInElement(logoutButton, LOGOUT_BUTTON_EXPECTED_TEXT);
     }
 
     public void logOut() {
-        burgerMenuButton.click();
-        logoutButton.click();
+        clickOnWebElement(burgerMenuButton);
+        clickOnWebElement(logoutButton);
+    }
+
+    public WebElement getResetAppStateButton() {
+        return resetAppStateButton;
+    }
+
+    public String getLOGOUT_BUTTON_EXPECTED_TEXT() {
+        return LOGOUT_BUTTON_EXPECTED_TEXT;
+    }
+
+    public void resetAppState() {
+        clickOnWebElement(burgerMenuButton);
+        clickOnWebElement(resetAppStateButton);
     }
 }

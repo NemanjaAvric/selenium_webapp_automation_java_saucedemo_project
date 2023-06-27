@@ -26,7 +26,7 @@ public class LoginPage extends BasePage {
     public void logIn(String username, String password) {
         usernameInputField.sendKeys(username);
         passwordInputField.sendKeys(password);
-        loginButton.click();
+        clickOnWebElement(loginButton);
     }
 
     public void clearLoginInputFields() {

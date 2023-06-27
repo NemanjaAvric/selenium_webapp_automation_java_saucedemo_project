@@ -1,6 +1,5 @@
 package tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,9 +9,10 @@ import pages.LoginPage;
 public class InventoryTests extends BaseTest {
 
 
-    private InventoryPage inventoryPage;
+    protected InventoryPage inventoryPage;
 
     private LoginPage loginPage;
+
 
     @BeforeClass
     public void beforeClass() {
@@ -25,28 +25,44 @@ public class InventoryTests extends BaseTest {
     @BeforeMethod
     public void beforeMethod() {
         super.beforeMethod();
-        driver.manage().window().fullscreen();
-        loginPage.logIn(getRandomValidUsername(), VALID_PASSWORD);
-
+        driverFullscreen();
+        loginPage.logIn(STANDARD_USER_LOGIN, VALID_PASSWORD);
     }
 
     @Test
     public void dropDownMenuAToZOrder() {
-        Assert.assertTrue(inventoryPage.ckeckAToZOrder());
+        assertTrue(inventoryPage.ckeckAToZOrder());
     }
 
     @Test
     public void dropDownMenuZToAOrder() {
-        Assert.assertTrue(inventoryPage.checkZToAOrder());
+        assertTrue(inventoryPage.checkZToAOrder());
     }
 
     @Test
     public void dropDownMenuPriceLowToHighOrder() {
-        Assert.assertTrue(inventoryPage.checkLowToHighPriceOrder());
+        assertTrue(inventoryPage.checkLowToHighPriceOrder());
     }
 
     @Test
     public void dropDownMenuPriceHighToLowOrder() {
-        Assert.assertTrue(inventoryPage.checkHighToLowPriceOrder());
+        assertTrue(inventoryPage.checkHighToLowPriceOrder());
+    }
+
+    @Test
+    public void addToCart() {
+        assertTrue(inventoryPage.checkStatusOfCart());
+    }
+
+    @Test
+    public void testIfButtonsWorkProperlyOrderly() {
+        assertTrue(inventoryPage.doButtonWorkProperlyOrderly());
+        assertTrue(inventoryPage.checkNumberOfItemsAddedToTheCart());
+    }
+
+    @Test
+    public void testIfButtonsWorkProperlyRandomly() {
+        assertTrue(inventoryPage.doButtonWorkProperlyRandomly());
+        assertTrue(inventoryPage.checkNumberOfItemsAddedToTheCart());
     }
 }
